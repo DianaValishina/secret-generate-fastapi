@@ -1,0 +1,21 @@
+
+services:
+
+  db:
+    image: postgres:15
+    container_name: db_app
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: secret_marks
+    image: secret_marks:latest
+    ports:
+      - 80:80
+    depends_on:
+      - db
